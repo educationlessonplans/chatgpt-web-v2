@@ -135,7 +135,7 @@ export function classifyMessage(message: unknown, includeReasoning = false): Con
     messageId: typeof record.id === "string" ? record.id : undefined,
     metadata: record.metadata && typeof record.metadata === "object" ? record.metadata : undefined,
   };
-  if (type.includes("thought") || type.includes("reasoning")) {
+  if (type.includes("thought") || type.includes("reasoning") || type.includes("thinking")) {
     return includeReasoning ? [{ type: "reasoning_delta", reasoning: text, ...common }] : [];
   }
   return [{ type: "text_delta", delta: text, ...common }];
