@@ -1,0 +1,23 @@
+{
+  "name": "chatgpt-web-v2",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Offline-testable OpenAI-compatible ChatGPT web protocol service",
+  "type": "module",
+  "engines": {
+    "node": ">=24.11.1 <25"
+  },
+  "scripts": {
+    "start": "/home/tyler/.nvm/versions/node/v24.11.1/bin/node --experimental-strip-types src/server.ts",
+    "test": "/home/tyler/.nvm/versions/node/v24.11.1/bin/node --experimental-strip-types --test test/*.test.ts",
+    "typecheck": "/home/tyler/.nvm/versions/node/v24.11.1/bin/node /home/tyler/.npm-global/lib/node_modules/typescript/bin/tsc --noEmit --target ES2022 --module NodeNext --moduleResolution NodeNext --skipLibCheck",
+    "syntax:check": "/home/tyler/.nvm/versions/node/v24.11.1/bin/node scripts/check-syntax.mjs",
+    "integrity:verify": "/home/tyler/.nvm/versions/node/v24.11.1/bin/node scripts/verify-omniroute-integrity.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0"
+  },
+  "dependencies": {
+    "tls-client-node": "0.2.0"
+  }
+}

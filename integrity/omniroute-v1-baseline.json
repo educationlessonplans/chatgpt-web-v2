@@ -1,0 +1,37 @@
+{
+  "generatedAt": "2026-08-18",
+  "artifacts": [
+    {
+      "path": "/home/tyler/.nvm/versions/node/v24.11.1/lib/node_modules/omniroute/dist/.build/next/server/chunks/_0e8rngb._.js",
+      "sha256": "5e867ebfe98eeb929df9f0246c9b2fbf15b4afd43784caad1c5324491400c629"
+    },
+    {
+      "path": "/home/tyler/.nvm/versions/node/v24.11.1/lib/node_modules/omniroute/dist/.build/next/server/chunks/_0fpntkz._.js",
+      "sha256": "93591105a9ea0871f4b3eda0b5e64e4076d87b1d3ba5a843ad5783040c0f0a9f"
+    },
+    {
+      "path": "/home/tyler/.nvm/versions/node/v24.11.1/lib/node_modules/omniroute/dist/.build/next/server/chunks/src_1kfwmbo._.js",
+      "sha256": "853b79d6a0ac32cc2f22295f88a295e33a1aac00cb82bd6602a058d48a025fc4"
+    },
+    {
+      "path": "/home/tyler/.nvm/versions/node/v24.11.1/lib/node_modules/omniroute/dist/.build/next/server/chunks/open-sse_00ujqaj._.js",
+      "sha256": "8128049598d585d16b53a9eb8f3998c3454172e88ba4259f197dd352adc3afe3"
+    },
+    {
+      "path": "/home/tyler/.nvm/versions/node/v24.11.1/lib/node_modules/omniroute/dist/.build/next/server/chunks/open-sse_1i4x_j_._.js",
+      "sha256": "2e821ca9e3150ea390c9704f5056d82d5a95fb3bb029e374168a20d61d5b2dd0"
+    },
+    {
+      "path": "/home/tyler/.nvm/versions/node/v24.11.1/lib/node_modules/omniroute/dist/.build/next/server/chunks/[root-of-the-server]__01n2pv9._.js",
+      "sha256": "2a8d09860182345d2e19d9d36ee210712572fe996cb80795b749d40c36db9de1"
+    },
+    {
+      "path": "/home/tyler/.nvm/versions/node/v24.11.1/lib/node_modules/omniroute/dist/.build/next/server/chunks/[root-of-the-server]__16usn87._.js",
+      "sha256": "660b9dbf202c1ef6c248949c52bb66470ebe3f76ff57318bac7e935041d7ec71"
+    },
+    {
+      "path": "/home/tyler/.nvm/versions/node/v24.11.1/lib/node_modules/omniroute/dist/open-sse/mcp-server/server.js",
+      "sha256": "8570e4df50c4893e51c8207792421eff3e8911844dbc4dd226c2fbbcc0ebbf60"
+    }
+  ]
+}

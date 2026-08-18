@@ -1,0 +1,12 @@
+node_modules/
+data/*.sqlite
+data/*.sqlite-*
+data/session-cookie
+data/*.cookie
+data/.session-cookie-*.tmp
+**/session-cookie
+**/*.cookie
+**/.session-cookie-*.tmp
+data/images/
+.env
+*.log
