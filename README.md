@@ -11,15 +11,13 @@ The default listener is `127.0.0.1:20129`.
 Use the required runtime explicitly:
 
 ```sh
-NODE=/home/tyler/.nvm/versions/node/v24.11.1/bin/node
-NPM_CLI=/home/tyler/.nvm/versions/node/v24.11.1/lib/node_modules/npm/bin/npm-cli.js
-cd /mnt/c/Users/Tyler/Documents/ChatGPT/chatgpt-web-v2
-"$NODE" "$NPM_CLI" install
-"$NODE" "$NPM_CLI" test
-"$NODE" "$NPM_CLI" run typecheck
-"$NODE" "$NPM_CLI" run syntax:check
-"$NODE" "$NPM_CLI" run integrity:verify
-CHATGPT_SESSION_COOKIE='[paste only in the process environment]' "$NODE" --experimental-strip-types src/server.ts
+cd /path/to/chatgpt-web-v2
+npm install
+npm test
+npm run typecheck
+npm run syntax:check
+npm run integrity:verify
+CHATGPT_SESSION_COOKIE='[paste only in the process environment]' node --experimental-strip-types src/server.ts
 ```
 
 The normal tests use only sanitized fixtures and injected mock transports. They do not make a ChatGPT request and contain no real credentials. Node's `node:sqlite` is used for durable state; its experimental warning is expected on Node 24. `syntax:check` checks every source/test/script file; it is intentionally a syntax check, not a formatter.
