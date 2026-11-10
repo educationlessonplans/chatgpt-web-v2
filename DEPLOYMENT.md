@@ -21,26 +21,26 @@ Hermes -> OmniRoute :20128 -> ChatGPT Web v2 :20129 -> chatgpt.com
 
 | Purpose | Value |
 | --- | --- |
-| Project | `/mnt/c/Users/Tyler/Documents/ChatGPT/chatgpt-web-v2` |
-| Node runtime | `/home/tyler/.nvm/versions/node/v24.11.1/bin/node` |
-| OmniRoute CLI | `/home/tyler/.nvm/versions/node/v24.11.1/lib/node_modules/omniroute/bin/omniroute.mjs` |
+| Project | `/path/to/chatgpt-web-v2` |
+| Node runtime | `$HOME/.nvm/versions/node/v24.11.1/bin/node` |
+| OmniRoute CLI | `$HOME/.nvm/versions/node/v24.11.1/lib/node_modules/omniroute/bin/omniroute.mjs` |
 | V2 service | `http://127.0.0.1:20129` |
 | OmniRoute | `http://127.0.0.1:20128` |
-| V2 operator config | `/home/tyler/.config/chatgpt-web-v2` |
-| V2 persistent data | `/home/tyler/.local/share/chatgpt-web-v2` |
+| V2 operator config | `$HOME/.config/chatgpt-web-v2` |
+| V2 persistent data | `$HOME/.local/share/chatgpt-web-v2` |
 
 ## 1. Preflight
 
 Confirm the expected runtime and offline validation before installing services:
 
 ```bash
-cd /mnt/c/Users/Tyler/Documents/ChatGPT/chatgpt-web-v2
+cd /path/to/chatgpt-web-v2
 
-/home/tyler/.nvm/versions/node/v24.11.1/bin/node --version
-/home/tyler/.nvm/versions/node/v24.11.1/bin/npm test
-/home/tyler/.nvm/versions/node/v24.11.1/bin/npm run typecheck
-/home/tyler/.nvm/versions/node/v24.11.1/bin/npm run syntax:check
-/home/tyler/.nvm/versions/node/v24.11.1/bin/npm run integrity:verify
+node --version
+npm test
+npm run typecheck
+npm run syntax:check
+npm run integrity:verify
 
 systemctl --user is-system-running
 loginctl show-user "$USER" -p Linger
@@ -66,15 +66,15 @@ Changing `wsl.conf` requires a full WSL shutdown from Windows before it takes ef
 
 ```bash
 install -d -m 700 \
-  /home/tyler/.config/chatgpt-web-v2 \
-  /home/tyler/.local/share/chatgpt-web-v2
+  $HOME/.config/chatgpt-web-v2 \
+  $HOME/.local/share/chatgpt-web-v2
 ```
 
-Create `/home/tyler/.config/chatgpt-web-v2/service.env`:
+Create `$HOME/.config/chatgpt-web-v2/service.env`:
 
 ```ini
-CHATGPT_WEB_V2_DATA_DIR=/home/tyler/.local/share/chatgpt-web-v2
-CHATGPT_WEB_V2_CREDENTIAL_FILE=/home/tyler/.config/chatgpt-web-v2/session-cookie
+CHATGPT_WEB_V2_DATA_DIR=/home/you/.local/share/chatgpt-web-v2
+CHATGPT_WEB_V2_CREDENTIAL_FILE=/home/you/.config/chatgpt-web-v2/session-cookie
 CHATGPT_WEB_V2_MAX_CONCURRENCY=1
 CHATGPT_WEB_V2_REASONING=true
 CHATGPT_WEB_V2_LOG_LEVEL=info
@@ -83,7 +83,7 @@ CHATGPT_WEB_V2_LOG_LEVEL=info
 Protect it:
 
 ```bash
-chmod 600 /home/tyler/.config/chatgpt-web-v2/service.env
+chmod 600 $HOME/.config/chatgpt-web-v2/service.env
 ```
 
 Start at concurrency `1`. Raise it to `2` and then `3` only after the canary procedure succeeds.
@@ -96,10 +96,10 @@ Use a silent prompt so the value does not enter shell history:
 
 ```bash
 read -rsp "ChatGPT session cookie: " CHATGPT_V2_COOKIE
-printf '%s' "$CHATGPT_V2_COOKIE" > /home/tyler/.config/chatgpt-web-v2/session-cookie
+printf '%s' "$CHATGPT_V2_COOKIE" > $HOME/.config/chatgpt-web-v2/session-cookie
 unset CHATGPT_V2_COOKIE
 printf '\n'
-chmod 600 /home/tyler/.config/chatgpt-web-v2/session-cookie
+chmod 600 $HOME/.config/chatgpt-web-v2/session-cookie
 ```
 
 Do not inspect the file with `cat`, include it in diagnostic bundles, or paste it into OmniRoute logs. ChatGPT Web v2 atomically replaces this file when ChatGPT rotates the session cookie.
@@ -108,7 +108,7 @@ The credential file takes precedence over `CHATGPT_SESSION_COOKIE`. The environm
 
 ## 4. Install ChatGPT Web v2 as a systemd user service
 
-Create `/home/tyler/.config/systemd/user/chatgpt-web-v2.service`:
+Create `$HOME/.config/systemd/user/chatgpt-web-v2.service`:
 
 ```ini
 [Unit]
@@ -118,9 +118,9 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/mnt/c/Users/Tyler/Documents/ChatGPT/chatgpt-web-v2
-EnvironmentFile=/home/tyler/.config/chatgpt-web-v2/service.env
-ExecStart=/home/tyler/.nvm/versions/node/v24.11.1/bin/node --experimental-strip-types /mnt/c/Users/Tyler/Documents/ChatGPT/chatgpt-web-v2/src/server.ts
+WorkingDirectory=/path/to/chatgpt-web-v2
+EnvironmentFile=/home/you/.config/chatgpt-web-v2/service.env
+ExecStart=/home/you/.nvm/versions/node/v24.11.1/bin/node --experimental-strip-types /path/to/chatgpt-web-v2/src/server.ts
 Restart=always
 RestartSec=5
 TimeoutStopSec=30
@@ -165,8 +165,8 @@ The logger is designed to redact credentials, but logs should still be treated a
 Use the installed Node runtime and OmniRoute CLI explicitly:
 
 ```bash
-/home/tyler/.nvm/versions/node/v24.11.1/bin/node \
-  /home/tyler/.nvm/versions/node/v24.11.1/lib/node_modules/omniroute/bin/omniroute.mjs \
+node \
+  $HOME/.nvm/versions/node/v24.11.1/lib/node_modules/omniroute/bin/omniroute.mjs \
   autostart enable
 ```
 
@@ -354,11 +354,11 @@ journalctl --user -u omniroute.service --since today --no-pager
 ### Re-run validation after code or dependency changes
 
 ```bash
-cd /mnt/c/Users/Tyler/Documents/ChatGPT/chatgpt-web-v2
-/home/tyler/.nvm/versions/node/v24.11.1/bin/npm test
-/home/tyler/.nvm/versions/node/v24.11.1/bin/npm run typecheck
-/home/tyler/.nvm/versions/node/v24.11.1/bin/npm run syntax:check
-/home/tyler/.nvm/versions/node/v24.11.1/bin/npm run integrity:verify
+cd /path/to/chatgpt-web-v2
+npm test
+npm run typecheck
+npm run syntax:check
+npm run integrity:verify
 ```
 
 Restart v2 only after validation passes.
